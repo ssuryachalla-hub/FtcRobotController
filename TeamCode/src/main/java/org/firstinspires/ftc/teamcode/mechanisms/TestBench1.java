@@ -1,46 +1,26 @@
 package org.firstinspires.ftc.teamcode.mechanisms;
 
-
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-
-public class TestBench {
-    private DigitalChannel touchSensor;
-
+public class TestBench1 {
     private DcMotor motor;
 
     private double ticksPerRev;
 
-
     public void init(HardwareMap hwMap) {
-        touchSensor = hwMap.get(DigitalChannel.class, "touch_sensor");
-        touchSensor.setMode(DigitalChannel.Mode.INPUT);
+
 
         motor = hwMap.get(DcMotor.class, "motor");
         motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         ticksPerRev = motor.getMotorType().getTicksPerRev();
     }
 
-    public boolean isTouchSensorPressed(){
-        return !touchSensor.getState();
-    }
-
-    public boolean IsTouchSensorReleased(){
-        return touchSensor.getState();
+    public void setMotorSpeed(double speed) {
+        motor.setPower(speed);
     }
 
     public double getMotorRevs(){
         return motor.getCurrentPosition() / ticksPerRev;
     }
-
-
-
-    public void setMotorSpeed(double speed) {
-        motor.setPower(speed);
-    }
-
-
-
 }
